@@ -1,0 +1,14 @@
+﻿  CaveStory.cpp
+  game.cpp
+C:\Users\shawn\Desktop\Cave Story Project\CaveStory\game.cpp(64,19): warning C4244: 'argument': conversion from 'const _Ty' to 'float', possible loss of data
+C:\Users\shawn\Desktop\Cave Story Project\CaveStory\game.cpp(64,19): warning C4244:         with
+C:\Users\shawn\Desktop\Cave Story Project\CaveStory\game.cpp(64,19): warning C4244:         [
+C:\Users\shawn\Desktop\Cave Story Project\CaveStory\game.cpp(64,19): warning C4244:             _Ty=int
+C:\Users\shawn\Desktop\Cave Story Project\CaveStory\game.cpp(64,19): warning C4244:         ]
+  level.cpp
+C:\Users\shawn\Desktop\Cave Story Project\CaveStory\game.cpp(82,22): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\Cave Story Project\CaveStory\level.cpp(90,26): warning C4018: '<': signed/unsigned mismatch
+C:\Users\shawn\Desktop\Cave Story Project\CaveStory\level.cpp(51,10): warning C4101: 'path': unreferenced local variable
+  Generating Code...
+C:\Users\shawn\Desktop\Cave Story Project\CaveStory\level.cpp(153,20): warning C4018: '<': signed/unsigned mismatch
+  CaveStory.vcxproj -> C:\Users\shawn\Desktop\Cave Story Project\CaveStory\Debug\CaveStory.exe
