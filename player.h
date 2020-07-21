@@ -6,13 +6,15 @@
 #include "graphics.h"
 #include "globals.h"
 
+using namespace std;
+
 class Player : public AnimatedSprite {
 public:
 	//default constructor
 	Player();
 
 	//custom constructor
-	Player(Graphics& grpahics, float x, float y);
+	Player(Graphics& graphics, Vector2 spawnPoint);
 
 	//draw method for player class
 	void draw(Graphics& graphics);
@@ -30,10 +32,15 @@ public:
 	//override abstract functions in animatedSprite
 	virtual void animationDone(string currentAnimation);
 	virtual void setupAnimations();
+	void handleTileCollisions(vector<Rectangle> & others);
+
+	const float getX() const;
+	const float getY() const;
 
 private:
 	float _dx, _dy;
 	Direction _facing;
+	bool _grounded;
 };
 
 #endif

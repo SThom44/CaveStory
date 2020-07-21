@@ -19,12 +19,20 @@ Sprite::Sprite(Graphics& graphics, const string& filePath, int sourceX, int sour
 	if (this->_spriteSheet == NULL) {
 		printf("\nError: Unable to load image\n");
 	}
+
+	this->_boundingBox = Rectangle(this->_x, this->_y,
+		width * globals::SPRITE_SCALE,
+		height * globals::SPRITE_SCALE);
 }
 
 Sprite::~Sprite() {}
 
 //update function
-void Sprite::update() {}
+void Sprite::update() {
+	this->_boundingBox = Rectangle(this->_x, this->_y,
+		_sourceRect.w * globals::SPRITE_SCALE,
+		_sourceRect.h * globals::SPRITE_SCALE);
+}
 
 //draw the image to screen
 void Sprite::draw(Graphics& graphics, int x, int y) {
@@ -32,3 +40,35 @@ void Sprite::draw(Graphics& graphics, int x, int y) {
 	graphics.blitSurface(this->_spriteSheet, &this->_sourceRect, &destinationRectangle);
 }
 
+//get bounding box
+const Rectangle Sprite::getBoundingBox() const {
+	return this->_boundingBox;
+}
+
+//Determine side collision happens on
+const sides::Side Sprite::getCollisionSide(Rectangle& other) const {
+	int amtRight;
+	int amtLeft;
+	int amtTop;
+	int amtBottom;
+
+	amtRight = this->getBoundingBox().getRight() - other.getLeft();
+	amtLeft = other.getRight() - this->getBoundingBox().getLeft();
+	amtTop = other.getBottom() - this->getBoundingBox().getTop();
+	amtBottom = this->getBoundingBox().getBottom() - other.getTop();
+
+	int vals[4] = { abs(amtRight), abs(amtLeft), abs(amtTop), abs(amtBottom) };
+	int lowest = vals[0];
+	for (int i = 0; i < 4; i++) {
+		if (vals[i] < lowest) {
+			lowest = vals[i];
+		}
+	}
+
+	return
+		lowest == abs(amtRight) ? sides::Side::RIGHT :
+		lowest == abs(amtLeft) ? sides::Side::LEFT :
+		lowest == abs(amtTop) ? sides::Side::TOP :
+		lowest == abs(amtBottom) ? sides::Side::BOTTOM :
+		sides::Side::NONE;
+}

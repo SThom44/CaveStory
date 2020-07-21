@@ -139,9 +139,60 @@ void Level::loadMap(string mapName, Graphics& graphics) {
 			pLayer = pLayer->NextSiblingElement("layer");
 		}
 	}
+
+	XMLElement* pObjectGroup = mapNode->FirstChildElement("objectgroup");
+	if (pObjectGroup != NULL) {
+		while (pObjectGroup) {
+			const char* name = pObjectGroup->Attribute("name");
+			stringstream ss;
+			ss << name;
+			if (ss.str() == "collisions") {
+				XMLElement* pObject = pObjectGroup->FirstChildElement("object");
+				if (pObject != NULL) {
+					while (pObject) {
+						float x;
+						float y;
+						float width;
+						float height;
+
+						x = pObject->FloatAttribute("x");
+						y = pObject->FloatAttribute("y");
+						width = pObject->FloatAttribute("width");
+						height = pObject->FloatAttribute("height");
+						this->_collisionRects.push_back(Rectangle(
+							ceil(x) * globals::SPRITE_SCALE,
+							ceil(y) * globals::SPRITE_SCALE,
+							ceil(width) * globals::SPRITE_SCALE,
+							ceil(height) * globals::SPRITE_SCALE
+						));
+
+						pObject = pObject->NextSiblingElement("object");
+					}
+				}
+			}
+
+			else if (ss.str() == "spawn_points") {
+				XMLElement* pObject = pObjectGroup->FirstChildElement("object");
+				if (pObject != NULL) {
+					while (pObject) {
+						float x = pObject->FloatAttribute("x");
+						float y = pObject->FloatAttribute("y");
+						const char* name = pObject->Attribute("name");
+						stringstream ss;
+						ss << name;
+						if (ss.str() == "player") {
+							this->_spawnPoint = Vector2
+							(ceil(x) * globals::SPRITE_SCALE,
+								ceil(y) * globals::SPRITE_SCALE);
+						}
+						pObject = pObject->NextSiblingElement("object");
+					}
+				}
+			}
+			pObjectGroup = pObjectGroup->NextSiblingElement("objectgroup");
+		}
+	}
 }
-
-
 
 
 void Level::update(int elapsedTime) {
@@ -156,4 +207,18 @@ void Level::draw(Graphics& graphics) {
 	}
 
 
+}
+
+vector<Rectangle> Level::checkTileCollisions(const Rectangle& other) {
+	vector <Rectangle> others;
+	for (int i = 0; i < this->_collisionRects.size(); i++) {
+		if (this->_collisionRects.at(i).collidesWith(other)) {
+			others.push_back(this->_collisionRects.at(i));
+		}
+	}
+	return others;
+}
+
+const Vector2 Level::getPlayerSpawnpoint() const {
+	return this->_spawnPoint;
 }

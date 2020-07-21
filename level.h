@@ -6,6 +6,7 @@
 #include "graphics.h"	
 #include "tile.h"
 #include "tinyxml2.h"
+#include "rectangle.h"
 #include <vector>
 #include <sstream>
 #include <algorithm>
@@ -48,6 +49,12 @@ public:
 	//draw function for the level class
 	void draw(Graphics& graphics);
 
+	//vector for checking collisions
+	vector<Rectangle> checkTileCollisions(const Rectangle& other);
+
+	//vector to hold the spawnpoint parsed from map
+	const Vector2 getPlayerSpawnpoint() const;
+
 private:
 	//instance some variables. mapname holds the name of the map loaded, spawnpoint is the spawnpoint on that map (x,y) and background texture is the texture created from that map. 
 	string _mapName;
@@ -57,16 +64,10 @@ private:
 	SDL_Texture* _backgroundTexture;
 	vector<Tile> _tileList;
 	vector<Tileset> _tilesets;
+	vector<Rectangle> _collisionRects;
 
 	//load the map. Pass to the function the mapname and a reference to the graphics object.
 	void loadMap(string mapName, Graphics& graphics);
 };
-
-
-
-
-
-
-
 
 #endif

@@ -4,6 +4,7 @@
 
 #include "graphics.h"
 #include "globals.h"
+#include "rectangle.h"
 #include <SDL.h>
 #include <string>
 
@@ -27,9 +28,16 @@ public:
 	//draw sprite to specific location
 	void draw(Graphics& graphics, int x, int y);
 
+	//getter function for bounding box
+	const Rectangle getBoundingBox() const;
+
+	//getter function to figure out colliding sides
+	const sides::Side getCollisionSide(Rectangle& other) const;
+
 protected:
 	SDL_Rect _sourceRect;
 	SDL_Texture* _spriteSheet;
+	Rectangle _boundingBox;
 	float _x, _y;
 
 private:

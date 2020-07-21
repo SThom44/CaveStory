@@ -10,6 +10,25 @@ namespace globals {
 	const float SPRITE_SCALE = 2.0f;
 }
 
+namespace sides {
+	enum class Side {
+		TOP,
+		BOTTOM,
+		LEFT,
+		RIGHT,
+		NONE
+	};
+
+	const inline Side getOppositeSide(Side side) {
+		return
+			side == Side::TOP ? Side::BOTTOM :
+			side == Side::BOTTOM ? Side::TOP :
+			side == Side::LEFT ? Side::RIGHT :
+			side == Side::RIGHT ? Side::LEFT :
+			Side::NONE;
+	}
+}
+
 //Set movement for assets (Mostly Quote)
 enum class Direction {
 	LEFT,
