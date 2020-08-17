@@ -4,7 +4,7 @@
 
 #include "graphics.h"
 #include "globals.h"
-#include "rectangle.h"
+#include "Rectangle.h"
 #include <SDL.h>
 #include <string>
 
@@ -33,6 +33,22 @@ public:
 
 	//getter function to figure out colliding sides
 	const sides::Side getCollisionSide(Rectangle& other) const;
+
+	//getter functions to getX and getYof sprite box on spritesheet
+	const inline float getX() const {
+		return this->_x;
+	}
+
+	const inline float getY() const {
+		return this->_y;
+	}
+
+	//functions to set the source points, width
+	//and height on the spritesheet and window
+	void setSourceRectX(int value);
+	void setSourceRectY(int value);
+	void setSourceRectH(int value);
+	void setSourceRectW(int value);
 
 protected:
 	SDL_Rect _sourceRect;

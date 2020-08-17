@@ -1,8 +1,129 @@
-﻿  tile.cpp
-C:\Users\shawn\Desktop\CaveStory - Copy\tile.cpp(9,65): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\shawn\Desktop\CaveStory - Copy\tile.cpp(9,30): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\shawn\Desktop\CaveStory - Copy\tile.cpp(16,76): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
-C:\Users\shawn\Desktop\CaveStory - Copy\tile.cpp(16,76): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\shawn\Desktop\CaveStory - Copy\tile.cpp(16,115): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
-C:\Users\shawn\Desktop\CaveStory - Copy\tile.cpp(16,115): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+﻿  Bat.cpp
+C:\Users\shawn\Desktop\CaveStory - Copy\slope.h(18,60): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\door.h(21,17): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\door.h(20,16): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\door.h(19,14): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\door.h(18,24): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\Bat.cpp(7,12): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\Bat.cpp(8,12): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\Bat.cpp(19,44): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\Bat.cpp(21,21): warning C4553: '==': result of expression not used; did you intend '='?
+  CaveStory.cpp
+C:\Users\shawn\Desktop\CaveStory - Copy\slope.h(18,60): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\door.h(21,17): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\door.h(20,16): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\door.h(19,14): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\door.h(18,24): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Enemy.cpp
+C:\Users\shawn\Desktop\CaveStory - Copy\slope.h(18,60): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\door.h(21,17): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\door.h(20,16): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\door.h(19,14): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\door.h(18,24): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\Enemy.cpp(9,98): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\Enemy.cpp(9,94): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\Enemy.cpp(9,80): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\Enemy.cpp(20,47): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\Enemy.cpp(20,37): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  game.cpp
+C:\Users\shawn\Desktop\CaveStory - Copy\slope.h(18,60): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\door.h(21,17): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\door.h(20,16): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\door.h(19,14): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\door.h(18,24): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\game.cpp(87,19): warning C4244: 'argument': conversion from 'const _Ty' to 'float', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+C:\Users\shawn\Desktop\CaveStory - Copy\game.cpp(105,22): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\game.cpp(107,20): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  hud.cpp
+C:\Users\shawn\Desktop\CaveStory - Copy\slope.h(18,60): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\door.h(21,17): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\door.h(20,16): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\door.h(19,14): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\door.h(18,24): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\hud.cpp(24,46): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\hud.cpp(28,98): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\hud.cpp(28,67): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\hud.cpp(29,92): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\hud.cpp(29,63): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\hud.cpp(30,101): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\hud.cpp(30,69): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\hud.cpp(31,71): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\hud.cpp(31,49): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\hud.cpp(32,77): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\hud.cpp(32,53): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\hud.cpp(33,71): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\hud.cpp(33,49): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\hud.cpp(34,68): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\hud.cpp(34,47): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\hud.cpp(35,71): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\hud.cpp(35,49): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  level.cpp
+C:\Users\shawn\Desktop\CaveStory - Copy\slope.h(18,60): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\door.h(21,17): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\door.h(20,16): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\door.h(19,14): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\door.h(18,24): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(73,47): warning C4244: '=': conversion from 'int64_t' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(119,26): warning C4018: '<': signed/unsigned mismatch
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(155,26): warning C4018: '<': signed/unsigned mismatch
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(164,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(209,21): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(208,20): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(207,16): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(206,16): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(224,12): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(223,24): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(234,26): warning C4018: '<': signed/unsigned mismatch
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(242,25): warning C4018: '<': signed/unsigned mismatch
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(246,49): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(244,49): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(250,50): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(248,57): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(272,17): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(271,17): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(287,43): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(287,40): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(287,37): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(287,34): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(328,41): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(327,68): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(52,10): warning C4101: 'path': unreferenced local variable
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(355,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(358,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(366,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(370,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(373,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(382,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(392,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(402,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\shawn\Desktop\CaveStory - Copy\level.cpp(412,20): warning C4018: '<': signed/unsigned mismatch
+  player.cpp
+C:\Users\shawn\Desktop\CaveStory - Copy\slope.h(18,60): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\door.h(21,17): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\door.h(20,16): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\door.h(19,14): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\door.h(18,24): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\player.cpp(15,79): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\player.cpp(15,65): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\player.cpp(29,47): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\player.cpp(29,37): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\player.cpp(35,25): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\player.cpp(123,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\shawn\Desktop\CaveStory - Copy\player.cpp(128,41): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\player.cpp(132,71): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\player.cpp(137,40): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\player.cpp(140,71): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\player.cpp(147,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\shawn\Desktop\CaveStory - Copy\player.cpp(148,9): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\player.cpp(151,12): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\player.cpp(154,20): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\player.cpp(161,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\shawn\Desktop\CaveStory - Copy\player.cpp(164,42): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\player.cpp(165,42): warning C4244: '=': conversion from 'const int' to 'float', possible loss of data
+C:\Users\shawn\Desktop\CaveStory - Copy\player.cpp(171,20): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
   CaveStory.vcxproj -> C:\Users\shawn\Desktop\CaveStory - Copy\Debug\CaveStory.exe

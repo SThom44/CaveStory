@@ -1,13 +1,14 @@
 #include "level.h"
-
+#include "player.h"
+#include "Enemy.h"
+#include "Bat.h"
 
 //default constructor
 Level::Level() {}
 
 //custom constructor. Assign some local variables and pass the mapName and the graphics object to the loadMap method.
-Level::Level(string mapName, Vector2 spawnPoint, Graphics& graphics) :
+Level::Level(string mapName, Graphics& graphics) :
 	_mapName(mapName),
-	_spawnPoint(spawnPoint),
 	_size(Vector2(0, 0)) {
 
 	this->loadMap(mapName, graphics);
@@ -55,6 +56,33 @@ void Level::loadMap(string mapName, Graphics& graphics) {
 			SDL_Texture* tex = SDL_CreateTextureFromSurface(graphics.getRenderer(), graphics.loadImage(ss.str()));
 			this->_tilesets.push_back(Tileset(tex, firstgid));
 
+			//Get all animations for that tileset
+			XMLElement* pTileA = pTileset->FirstChildElement("tile");
+			if (pTileA != NULL) {
+				while (pTileA) {
+					AnimatedTileInfo ati;
+					ati.StartTileId = pTileA->IntAttribute("id") + firstgid;
+					ati.TilesetsFirstGid = firstgid;
+					XMLElement* pAnimation = pTileA->FirstChildElement("animation");
+					if (pAnimation != NULL) {
+						while (pAnimation) {
+							XMLElement* pFrame = pAnimation->FirstChildElement("frame");
+							if (pFrame != NULL) {
+								while (pFrame) {
+									ati.TileIds.push_back(pFrame->IntAttribute("tileid") + firstgid);
+									ati.duration = pFrame->Int64Attribute("duration");
+									pFrame = pFrame->NextSiblingElement("frame");
+								}
+							}
+							pAnimation = pAnimation->NextSiblingElement("animation");
+						}
+					}
+					this->_animatedTileInfo.push_back(ati);
+
+					pTileA = pTileA->NextSiblingElement("tile");
+				}
+			}
+
 			pTileset = pTileset->NextSiblingElement("tileset");
 		}
 	}
@@ -87,10 +115,13 @@ void Level::loadMap(string mapName, Graphics& graphics) {
 							//get the tileset for the specific gid
 							int gid = pTile->IntAttribute("gid");
 							Tileset tls;
+							int closest = 0;
 							for (int i = 0; i < this->_tilesets.size(); i++) {
 								if (this->_tilesets[i].FirstGid <= gid) {
-									tls = this->_tilesets.at(i);
-									break;
+									if (this->_tilesets[i].FirstGid > closest) {
+										closest = this->_tilesets[i].FirstGid;
+										tls = this->_tilesets.at(i);
+									}
 								}
 							}
 
@@ -116,19 +147,30 @@ void Level::loadMap(string mapName, Graphics& graphics) {
 							Vector2 finalTilePosition = Vector2(xx, yy);
 
 							//Calculate the position of the tile in the tileset
-							int tilesetWidth;
-							int tilesetHeight;
-							SDL_QueryTexture(tls.Texture, NULL, NULL, &tilesetWidth, &tilesetHeight);
-							int tsxx = (gid - 1) % (tilesetWidth / tileWidth);
-							tsxx *= tileWidth;
-							int tsyy = 0;
-							int amt = ((gid - 1) / (tilesetWidth / tileWidth));
-							tsyy = tileHeight * amt;
-							Vector2 finalTilesetPosition = Vector2(tsxx, tsyy);
+							Vector2 finalTilesetPosition = this->getTilesetPosition(tls, gid, tileWidth, tileHeight);
 
 							//Build the actual tile and add it to the level's list
-							Tile tile(tls.Texture, Vector2(tileWidth, tileHeight), finalTilesetPosition, finalTilePosition);
-							this->_tileList.push_back(tile);
+							bool isAnimatedTile = false;
+							AnimatedTileInfo ati;
+							for (int i = 0; i < this->_animatedTileInfo.size(); i++) {
+								if (this->_animatedTileInfo.at(i).StartTileId == gid) {
+									ati = this->_animatedTileInfo.at(i);
+									isAnimatedTile = true;
+									break;
+								}
+							}
+							if (isAnimatedTile == true) {
+								std::vector<Vector2> tilesetPositions;
+								for (int i = 0; i < ati.TileIds.size(); i++) {
+									tilesetPositions.push_back(this->getTilesetPosition(tls, ati.TileIds.at(i), tileWidth, tileHeight));
+								}
+								AnimatedTile tile(tilesetPositions, ati.duration, tls.Texture, Vector2(tileWidth, tileHeight), finalTilePosition);
+								this->_animatedTileList.push_back(tile);
+							}
+							else {
+								Tile tile(tls.Texture, Vector2(tileWidth, tileHeight), finalTilesetPosition, finalTilePosition);
+								this->_tileList.push_back(tile);
+							}
 							tileCounter++;
 							pTile = pTile->NextSiblingElement("tile");
 						}
@@ -140,6 +182,7 @@ void Level::loadMap(string mapName, Graphics& graphics) {
 		}
 	}
 
+	//Parse out collisions for first object group
 	XMLElement* pObjectGroup = mapNode->FirstChildElement("objectgroup");
 	if (pObjectGroup != NULL) {
 		while (pObjectGroup) {
@@ -171,6 +214,49 @@ void Level::loadMap(string mapName, Graphics& graphics) {
 				}
 			}
 
+			else if (ss.str() == "slopes") {
+				XMLElement* pObject = pObjectGroup->FirstChildElement("object");
+				if (pObject != NULL) {
+					while (pObject) {
+						vector<Vector2> points;
+						Vector2 p1;
+						p1 = Vector2(ceil(pObject->FloatAttribute("x")),
+							ceil(pObject->FloatAttribute("y")));
+
+						XMLElement* pPolyline = pObject->FirstChildElement("polyline");
+						if (pPolyline != NULL) {
+							vector<string> pairs;
+							const char* pointString = pPolyline->Attribute("points");
+							stringstream ss;
+							ss << pointString;
+							utils::split(ss.str(), pairs, ' ');
+
+							for (int i = 0; i < pairs.size(); i++) {
+								vector<string> ps;
+								utils::split(pairs.at(i), ps, ',');
+								points.push_back(Vector2(stoi(ps.at(0)),
+									stoi(ps.at(1))));
+							}
+						}
+
+						for (int i = 0; i < points.size(); i += 2) {
+							this->_slopes.push_back(slope(Vector2(
+								(p1.x + points.at(i < 2 ? i : i - 1).x) *
+								globals::SPRITE_SCALE,
+								(p1.y + points.at(i < 2 ? i : i - 1).y) *
+								globals::SPRITE_SCALE),
+								Vector2((p1.x + points.at(i < 2 ? i + 1 : i).x) *
+									globals::SPRITE_SCALE,
+									(p1.y + points.at(i < 2 ? i + 1 : i).y) *
+									globals::SPRITE_SCALE)
+							));
+						}
+						pObject = pObject->NextSiblingElement("object");
+					}
+				}
+			}
+
+			//parse out spawn points object group
 			else if (ss.str() == "spawn_points") {
 				XMLElement* pObject = pObjectGroup->FirstChildElement("object");
 				if (pObject != NULL) {
@@ -189,13 +275,89 @@ void Level::loadMap(string mapName, Graphics& graphics) {
 					}
 				}
 			}
+
+			else if (ss.str() == "doors") {
+				XMLElement* pObject = pObjectGroup->FirstChildElement("object");
+				if (pObject != NULL) {
+					while (pObject) {
+						float x = pObject->FloatAttribute("x");
+						float y = pObject->FloatAttribute("y");
+						float w = pObject->FloatAttribute("width");
+						float h = pObject->FloatAttribute("height");
+						Rectangle rect = Rectangle(x, y, w, h);
+
+						XMLElement* pProperties = pObject->FirstChildElement("properties");
+						if (pProperties != NULL) {
+							while (pProperties) {
+								XMLElement* pProperty = pProperties->FirstChildElement("property");
+								if (pProperty != NULL) {
+									while (pProperty) {
+										const char* name = pProperty->Attribute("name");
+										stringstream ss;
+										ss << name;
+										if (ss.str() == "destination") {
+											const char* value = pProperty->Attribute("value");
+											stringstream ss2;
+											ss2 << value;
+											Door door = Door(rect, ss2.str());
+											this->_doorList.push_back(door);
+										}
+										pProperty = pProperty->NextSiblingElement("property");
+									}
+								}
+								pProperties = pProperties->NextSiblingElement("properties");
+							}
+						}
+						pObject = pObject->NextSiblingElement("object");
+					}
+				}
+			}
+			else if (ss.str() == "enemies") {
+				float x;
+				float y;
+				XMLElement* pObject = pObjectGroup->FirstChildElement("object");
+				if (pObject != NULL) {
+					while (pObject) {
+						x = pObject->FloatAttribute("x");
+						y = pObject->FloatAttribute("y");
+						const char* name = pObject->Attribute("name");
+						stringstream ss;
+						ss << name;
+						if (ss.str() == "bat") {
+							this->_enemies.push_back(new Bat(graphics, Vector2(floor(x) *
+								globals::SPRITE_SCALE, floor(y) * globals::SPRITE_SCALE)));
+						}
+						pObject = pObject->NextSiblingElement("object");
+					}
+				}
+			}
+
 			pObjectGroup = pObjectGroup->NextSiblingElement("objectgroup");
 		}
 	}
 }
 
+Vector2 Level::getTilesetPosition(Tileset tls, int gid, int tileWidth, int tileHeight) {
+	int tilesetWidth;
+	int tilesetHeight;
+	SDL_QueryTexture(tls.Texture, NULL, NULL, &tilesetWidth, &tilesetHeight);
+	int tsxx = (gid - 1) % (tilesetWidth / tileWidth);
+	tsxx *= tileWidth;
+	int tsyy = 0;
+	int amt = ((gid - tls.FirstGid) / (tilesetWidth / tileWidth));
+	tsyy = tileHeight * amt;
+	Vector2 finalTilesetPosition = Vector2(tsxx, tsyy);
 
-void Level::update(int elapsedTime) {
+	return finalTilesetPosition;
+}
+
+void Level::update(int elapsedTime, Player &player) {
+	for (int i = 0; i < this->_animatedTileList.size(); i++) {
+		this->_animatedTileList.at(i).update(elapsedTime);
+	}
+	for (int i = 0; i < this->_enemies.size(); i++) {
+		this->_enemies.at(i)->update(elapsedTime, player);
+	}
 
 }
 
@@ -205,15 +367,51 @@ void Level::draw(Graphics& graphics) {
 
 		this->_tileList.at(i).draw(graphics);
 	}
-
+	for (int i = 0; i < this->_animatedTileList.size(); i++) {
+		this->_animatedTileList.at(i).draw(graphics);
+	}
+	for (int i = 0; i < this->_enemies.size(); i++) {
+		this->_enemies.at(i)->draw(graphics);
+	}
 
 }
 
+//check for collisions
 vector<Rectangle> Level::checkTileCollisions(const Rectangle& other) {
 	vector <Rectangle> others;
 	for (int i = 0; i < this->_collisionRects.size(); i++) {
 		if (this->_collisionRects.at(i).collidesWith(other)) {
 			others.push_back(this->_collisionRects.at(i));
+		}
+	}
+	return others;
+}
+
+vector<slope> Level::checkSlopeCollisions(const Rectangle& other) {
+	vector<slope> others;
+	for (int i = 0; i < this->_slopes.size(); i++) {
+		if (this->_slopes.at(i).collidesWith(other)) {
+			others.push_back(this->_slopes.at(i));
+		}
+	}
+	return others;
+}
+
+vector<Door> Level::checkDoorCollisions(const Rectangle& other) {
+	vector<Door> others;
+	for (int i = 0; i < this->_doorList.size(); i++) {
+		if (this->_doorList.at(i).collidesWith(other)) {
+			others.push_back(this->_doorList.at(i));
+		}
+	}
+	return others;
+}
+
+vector<Enemy*> Level::checkEnemyCollisions(const Rectangle& other) {
+	vector<Enemy*> others;
+	for (int i = 0; i < this->_enemies.size(); i++) {
+		if (this->_enemies.at(i)->getBoundingBox().collidesWith(other)) {
+			others.push_back(this->_enemies.at(i));
 		}
 	}
 	return others;

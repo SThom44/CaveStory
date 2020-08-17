@@ -14,16 +14,19 @@ Game::~Game() {
 
 }
 
+//initialize game loop objects
 void Game::gameLoop() {
 	Graphics graphics;
 	Input input;
 	SDL_Event event;
 
+	this->_level = Level("map 1", graphics);
 	this->_player = Player(graphics, this->_level.getPlayerSpawnpoint());
-	this->_level = Level("map 1", Vector2(100, 100), graphics);
+	this->_hud = hud(graphics, this->_player);
 
 	int LAST_UPDATE_TIME = SDL_GetTicks();
 
+	//start game loop timer
 	while (true) {
 		input.beginNewFrame();
 		//beginning the main game loop
@@ -58,11 +61,30 @@ void Game::gameLoop() {
 			this->_player.stopMoving();
 		}
 
+		if (input.isKeyHeld(SDL_SCANCODE_UP) == true) {
+			this->_player.lookUp();
+		}
+
+		if (input.wasKeyReleased(SDL_SCANCODE_UP) == true) {
+			this->_player.stopLookingUp();
+		}
+
+		if (input.isKeyHeld(SDL_SCANCODE_DOWN) == true) {
+			this->_player.lookDown();
+		}
+
+		if (input.wasKeyReleased(SDL_SCANCODE_DOWN) == true) {
+			this->_player.stopLookingDown();
+		}
+
+		if (input.isKeyHeld(SDL_SCANCODE_Z) == true) {
+			this->_player.jump();
+		}
+
 		const int CURRENT_TIME_MS = SDL_GetTicks();
 		int ELAPSED_TIME_MS = CURRENT_TIME_MS - LAST_UPDATE_TIME;
-
+		this->_graphics = graphics;
 		this->update(min(ELAPSED_TIME_MS, MAX_FRAME_TIME));
-
 		LAST_UPDATE_TIME = CURRENT_TIME_MS;
 		
 		this->draw(graphics);
@@ -74,17 +96,34 @@ void Game::draw(Graphics& graphics) {
 	graphics.clear();
 	this->_level.draw(graphics);
 	this->_player.draw(graphics);
+	this->_hud.draw(graphics);
 	graphics.flip();
 }
 
 //define update method
 void Game::update(float elapsedTime){
-	this->_level.update(elapsedTime);
+	this->_level.update(elapsedTime, this->_player);
 	this->_player.update(elapsedTime);
+	this->_hud.update(elapsedTime, this->_player);
 
 	//Check for collisions
 	vector<Rectangle> others;
 	if ((others = this->_level.checkTileCollisions(this->_player.getBoundingBox())).size() > 0) {
 		this->_player.handleTileCollisions(others);
+	}
+
+	vector<slope> otherSlopes;
+	if ((otherSlopes = this->_level.checkSlopeCollisions(this->_player.getBoundingBox())).size() > 0) {
+		this->_player.handleSlopeCollisions(otherSlopes);
+	}
+
+	vector<Door> otherDoors;
+	if ((otherDoors = this->_level.checkDoorCollisions(this->_player.getBoundingBox())).size() > 0) {
+		this->_player.handleDoorCollisions(otherDoors, this->_level, this-> _graphics);
+	}
+
+	vector<Enemy*> otherEnemies;
+	if ((otherEnemies = this->_level.checkEnemyCollisions(this->_player.getBoundingBox())).size() > 0) {
+		this->_player.handleEnemyCollisions(otherEnemies);
 	}
 }

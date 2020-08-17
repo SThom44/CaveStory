@@ -160,29 +160,43 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="animatedSprite.cpp" />
+    <ClCompile Include="animatedtile.cpp" />
+    <ClCompile Include="Bat.cpp" />
     <ClCompile Include="CaveStory.cpp" />
+    <ClCompile Include="door.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="graphics.cpp" />
+    <ClCompile Include="hud.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="level.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="rectangle.cpp" />
+    <ClCompile Include="slope.cpp" />
     <ClCompile Include="sprite.cpp" />
     <ClCompile Include="tile.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
+    <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animatedSprite.h" />
+    <ClInclude Include="animatedtile.h" />
+    <ClInclude Include="Bat.h" />
+    <ClInclude Include="door.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="graphics.h" />
+    <ClInclude Include="hud.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="level.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="rectangle.h" />
+    <ClInclude Include="slope.h" />
     <ClInclude Include="sprite.h" />
     <ClInclude Include="tile.h" />
     <ClInclude Include="tinyxml2.h" />
+    <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="bkBlue.png" />

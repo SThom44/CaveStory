@@ -9,6 +9,7 @@
 #include "graphics.h"
 #include "player.h"
 #include "level.h"
+#include "hud.h"
 
 //Game class holds all information about the game loop
 using namespace std;
@@ -27,6 +28,8 @@ private:
 
 	Player _player;
 	Level _level;
+	hud _hud;
+	Graphics _graphics;
 };
 
 #endif
